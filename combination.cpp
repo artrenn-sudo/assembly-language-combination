@@ -12,10 +12,18 @@ uint16_t factorial(const uint16_t x) { return x; }
  */
 int main() {
     int n;
+    int k;
 
     // get and validate user input
     cout << "Enter n: ";
     cin >> n;
+    cout << "Enter k: ";
+    cin >> k;
+
+    if (n <= 0 || k <= 0) {
+        cout << "Error: n and k must be greater than 0." << endl;
+        return -1;
+    }
 
     // calculate C(n,k) = n! / (k! * (n-k)!)
     uint16_t c_n_k = factorial(n);
