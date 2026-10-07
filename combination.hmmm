@@ -7,15 +7,22 @@
 # register usage
 # STUDENTS MUST EXPLAIN ALL REGISTERS THEY USE AND FOR WHAT PURPOSE HERE
 ################################################################################
-# r0 <- 0
-# r1 <- n
-
-# HMMMM pre-defined registers
-# r13 Function return value
-# r14 Function return address
-# r15 Stack pointer
-
-# STUIDENTS NEED TO ADD THEIR OWN ASSEMBLY CODE HERE
+# r0  <- 0 (always 0)
+# r1  <- n (user input)
+# r2  <- k (user input)
+# r3  <- n - k
+# r4  <- n! result
+# r5  <- k! result
+# r6  <- (n - k)! result
+# r7  <- k! * (n - k)! (denominator)
+# r8  <- C(n, k) final result
+# r9  <- argument x for factorial function
+# r10 <- factorial loop counter
+# r11 <- constant 1
+# r12 <- error value / temporary
+# r13 <- Function return value (HMMM convention)
+# r14 <- Function return address (HMMM convention)
+# r15 <- Stack pointer (HMMM convention)
 
 ################################################################################
 # read n, print n, and stop
