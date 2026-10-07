@@ -25,8 +25,19 @@
 # r15 <- Stack pointer (HMMM convention)
 
 ################################################################################
-# read n, print n, and stop
+# Section: Input and Validation
 ################################################################################
-0 read  r1 # read n
-1 write r1 # print n
-2 halt     # stop the program
+0  setn  r15 60        # initialize stack pointer r15 to line 60
+1  read  r1            # read input n into r1
+2  read  r2            # read input k into r2
+3  jlezn r1 29         # if n <= 0, jump to error handling at line 29
+4  jlezn r2 29         # if k <= 0, jump to error handling at line 29
+5  halt                # temporary halt until calculation steps are added
+
+################################################################################
+# Section: Error Handling
+################################################################################
+29 setn  r12 -1        # load error code -1 into r12
+30 write r12           # print error code -1
+31 halt                # terminate program due to invalid input
+
