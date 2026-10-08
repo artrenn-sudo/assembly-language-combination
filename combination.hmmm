@@ -27,46 +27,77 @@
 ################################################################################
 # Section: Input and Validation
 ################################################################################
-0  setn  r15 60        # initialize stack pointer r15 to line 60
-1  read  r1            # read input n into r1
-2  read  r2            # read input k into r2
-3  jlezn r1 29         # if n <= 0, jump to error handling at line 29
-4  jlezn r2 29         # if k <= 0, jump to error handling at line 29
+# initialize stack pointer r15 to line 60
+0  setn  r15 60
+# read input n into r1
+1  read  r1
+# read input k into r2
+2  read  r2
+# if n <= 0, jump to error handling at line 29
+3  jlezn r1 29
+# if k <= 0, jump to error handling at line 29
+4  jlezn r2 29
+
 ################################################################################
 # Section: Function Call Prep
 ################################################################################
-5  copy  r9 r1         # pass argument x = n in r9
-6  calln r14 19        # call factorial(n), return address in r14
-7  copy  r4 r13        # store result n! into r4
-8  copy  r9 r2         # pass argument x = k in r9
-9  calln r14 19        # call factorial(k), return address in r14
-10 copy  r5 r13        # store result k! into r5
-11 sub   r3 r1 r2      # r3 = n - k
-12 copy  r9 r3         # pass argument x = (n - k) in r9
-13 calln r14 19        # call factorial(n - k), return address in r14
-14 copy  r6 r13        # store result (n - k)! into r6
-15 halt                # temporary halt until Step 9 final calc is added
+# pass argument x = n in r9
+5  copy  r9 r1
+# call factorial(n), return address in r14
+6  calln r14 19
+# store result n! into r4
+7  copy  r4 r13
+# pass argument x = k in r9
+8  copy  r9 r2
+# call factorial(k), return address in r14
+9  calln r14 19
+# store result k! into r5
+10 copy  r5 r13
+# r3 = n - k
+11 sub   r3 r1 r2
+# pass argument x = (n - k) in r9
+12 copy  r9 r3
+# call factorial(n - k), return address in r14
+13 calln r14 19
+# store result (n - k)! into r6
+14 copy  r6 r13
+# temporary halt until Step 9 final calc is added
+15 halt
 
 ################################################################################
 # Section: Factorial Function
 # Input:  r9 (x)
 # Output: r13 (x!)
 ################################################################################
-19 pushr r14 r15       # push return address r14 onto stack r15
-20 setn  r13 1         # initialize return value r13 = 1
-21 setn  r11 1         # initialize constant 1 in r11
-22 copy  r10 r9        # copy argument x from r9 into loop counter r10
-23 jlezn r10 27        # if counter <= 0, exit loop to line 27
-24 mul   r13 r13 r10   # multiply: r13 = r13 * r10
-25 sub   r10 r10 r11   # decrement counter: r10 = r10 - 1
-26 jumpn 23            # loop back to line 23
-27 popr  r14 r15       # pop return address r14 from stack r15
-28 jumpr r14           # return to caller address in r14
+# push return address r14 onto stack r15
+19 pushr r14 r15
+# initialize return value r13 = 1
+20 setn  r13 1
+# initialize constant 1 in r11
+21 setn  r11 1
+# copy argument x from r9 into loop counter r10
+22 copy  r10 r9
+# if counter <= 0, exit loop to line 27
+23 jlezn r10 27
+# multiply: r13 = r13 * r10
+24 mul   r13 r13 r10
+# decrement counter: r10 = r10 - 1
+25 sub   r10 r10 r11
+# loop back to line 23
+26 jumpn 23
+# pop return address r14 from stack r15
+27 popr  r14 r15
+# return to caller address in r14
+28 jumpr r14
 
 ################################################################################
 # Section: Error Handling
 ################################################################################
-29 setn  r12 -1        # load error code -1 into r12
-30 write r12           # print error code -1
-31 halt                # terminate program due to invalid input
+# load error code -1 into r12
+29 setn  r12 -1
+# print error code -1
+30 write r12
+# terminate program due to invalid input
+31 halt
+
 
