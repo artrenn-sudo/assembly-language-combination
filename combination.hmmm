@@ -32,7 +32,20 @@
 2  read  r2            # read input k into r2
 3  jlezn r1 29         # if n <= 0, jump to error handling at line 29
 4  jlezn r2 29         # if k <= 0, jump to error handling at line 29
-5  halt                # temporary halt until calculation steps are added
+################################################################################
+# Section: Function Call Prep
+################################################################################
+5  copy  r9 r1         # pass argument x = n in r9
+6  calln r14 19        # call factorial(n), return address in r14
+7  copy  r4 r13        # store result n! into r4
+8  copy  r9 r2         # pass argument x = k in r9
+9  calln r14 19        # call factorial(k), return address in r14
+10 copy  r5 r13        # store result k! into r5
+11 sub   r3 r1 r2      # r3 = n - k
+12 copy  r9 r3         # pass argument x = (n - k) in r9
+13 calln r14 19        # call factorial(n - k), return address in r14
+14 copy  r6 r13        # store result (n - k)! into r6
+15 halt                # temporary halt until Step 9 final calc is added
 
 ################################################################################
 # Section: Factorial Function
