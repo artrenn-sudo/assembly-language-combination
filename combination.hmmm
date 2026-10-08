@@ -41,6 +41,12 @@
 ################################################################################
 19 pushr r14 r15       # push return address r14 onto stack r15
 20 setn  r13 1         # initialize return value r13 = 1
+21 setn  r11 1         # initialize constant 1 in r11
+22 copy  r10 r9        # copy argument x from r9 into loop counter r10
+23 jlezn r10 27        # if counter <= 0, exit loop to line 27
+24 mul   r13 r13 r10   # multiply: r13 = r13 * r10
+25 sub   r10 r10 r11   # decrement counter: r10 = r10 - 1
+26 jumpn 23            # loop back to line 23
 27 popr  r14 r15       # pop return address r14 from stack r15
 28 jumpr r14           # return to caller address in r14
 
