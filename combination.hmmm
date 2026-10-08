@@ -61,8 +61,17 @@
 13 calln r14 19
 # store result (n - k)! into r6
 14 copy  r6 r13
-# temporary halt until Step 9 final calc is added
-15 halt
+################################################################################
+# Section: Final Calc
+################################################################################
+# multiply k! and (n - k)! to get denominator in r7
+15 mul   r7 r5 r6
+# divide n! by denominator to get result C(n, k) in r8
+16 div   r8 r4 r7
+# write out final combination result
+17 write r8
+# halt normal program execution
+18 halt
 
 ################################################################################
 # Section: Factorial Function
