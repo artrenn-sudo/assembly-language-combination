@@ -35,6 +35,16 @@
 5  halt                # temporary halt until calculation steps are added
 
 ################################################################################
+# Section: Factorial Function
+# Input:  r9 (x)
+# Output: r13 (x!)
+################################################################################
+19 pushr r14 r15       # push return address r14 onto stack r15
+20 setn  r13 1         # initialize return value r13 = 1
+27 popr  r14 r15       # pop return address r14 from stack r15
+28 jumpr r14           # return to caller address in r14
+
+################################################################################
 # Section: Error Handling
 ################################################################################
 29 setn  r12 -1        # load error code -1 into r12
