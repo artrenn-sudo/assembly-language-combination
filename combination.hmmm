@@ -1,8 +1,8 @@
 ################################################################################
 # Combinations C(n,k) solution
-# RENN LE
+# STUDENT NAME GOES HERE
 ################################################################################
-
+# RENN LE
 ################################################################################
 # register usage
 # STUDENTS MUST EXPLAIN ALL REGISTERS THEY USE AND FOR WHAT PURPOSE HERE
@@ -33,45 +33,50 @@
 1  read  r1
 # read input k into r2
 2  read  r2
-# if n <= 0, jump to error handling at line 29
-3  jlezn r1 29
-# if k <= 0, jump to error handling at line 29
-4  jlezn r2 29
+# if n < 0, jump to error handling at line 31
+3  jltzn r1 31
+# if n == 0, jump to error handling at line 31
+4  jeqzn r1 31
+# if k < 0, jump to error handling at line 31
+5  jltzn r2 31
+# if k == 0, jump to error handling at line 31
+6  jeqzn r2 31
 
 ################################################################################
 # Section: Function Call Prep
 ################################################################################
 # pass argument x = n in r9
-5  copy  r9 r1
+7  copy  r9 r1
 # call factorial(n), return address in r14
-6  calln r14 19
+8  calln r14 21
 # store result n! into r4
-7  copy  r4 r13
+9  copy  r4 r13
 # pass argument x = k in r9
-8  copy  r9 r2
+10 copy  r9 r2
 # call factorial(k), return address in r14
-9  calln r14 19
+11 calln r14 21
 # store result k! into r5
-10 copy  r5 r13
+12 copy  r5 r13
 # r3 = n - k
-11 sub   r3 r1 r2
+13 sub   r3 r1 r2
 # pass argument x = (n - k) in r9
-12 copy  r9 r3
+14 copy  r9 r3
 # call factorial(n - k), return address in r14
-13 calln r14 19
+15 calln r14 21
 # store result (n - k)! into r6
-14 copy  r6 r13
+16 copy  r6 r13
+
 ################################################################################
 # Section: Final Calc
 ################################################################################
 # multiply k! and (n - k)! to get denominator in r7
-15 mul   r7 r5 r6
+17 mul   r7 r5 r6
 # divide n! by denominator to get result C(n, k) in r8
-16 div   r8 r4 r7
+18 div   r8 r4 r7
 # write out final combination result
-17 write r8
+19 write r8
 # halt normal program execution
-18 halt
+20 halt
 
 ################################################################################
 # Section: Factorial Function
@@ -79,34 +84,32 @@
 # Output: r13 (x!)
 ################################################################################
 # push return address r14 onto stack r15
-19 pushr r14 r15
+21 pushr r14 r15
 # initialize return value r13 = 1
-20 setn  r13 1
+22 setn  r13 1
 # initialize constant 1 in r11
-21 setn  r11 1
+23 setn  r11 1
 # copy argument x from r9 into loop counter r10
-22 copy  r10 r9
-# if counter <= 0, exit loop to line 27
-23 jlezn r10 27
+24 copy  r10 r9
+# if counter == 0, exit loop to line 29
+25 jeqzn r10 29
 # multiply: r13 = r13 * r10
-24 mul   r13 r13 r10
+26 mul   r13 r13 r10
 # decrement counter: r10 = r10 - 1
-25 sub   r10 r10 r11
-# loop back to line 23
-26 jumpn 23
+27 sub   r10 r10 r11
+# loop back to line 25
+28 jumpn 25
 # pop return address r14 from stack r15
-27 popr  r14 r15
+29 popr  r14 r15
 # return to caller address in r14
-28 jumpr r14
+30 jumpr r14
 
 ################################################################################
 # Section: Error Handling
 ################################################################################
 # load error code -1 into r12
-29 setn  r12 -1
+31 setn  r12 -1
 # print error code -1
-30 write r12
+32 write r12
 # terminate program due to invalid input
-31 halt
-
-
+33 halt
